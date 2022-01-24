@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import [store] from "./actions/store";
-import [Provider] from "react-redux";
+import {Provider} from 'react-redux';
+import {store} from './actions/store';
+
 
 function App() {
   return (
-    <Provider store=[store]>
+    <Provider store>
     </Provider>
   );
 }
