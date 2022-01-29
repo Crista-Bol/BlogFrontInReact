@@ -4,7 +4,7 @@ const baseUrl="https://localhost:44310";
 export default {
     article(url=baseUrl){
         return {
-            fetchAll: ()=>axios.get(url+"/Articles/getAll"),
+            fetchAll: ()=>axios.get('https://localhost:44310/Articles/getAll'),
             fetchById: id=> axios.get(baseUrl+"/api/"+id),
             create:newRecord=>axios.post(baseUrl+"/api/addArticle",newRecord),
             update:(id,updateRecord)=>axios.put(url+"/api/updateArticle/"+id,updateRecord),

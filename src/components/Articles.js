@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import * as actions from "../actions/Article";
+import {connect} from "react-redux";
+
 //React host
 const Articles=(props)=>{
-    return (<div>form Articles</div>);
+    useEffect(()=> { props.fetchAllArticles()},[])
+    return (<div>hihih</div>);
 }
 
-export default Articles;
+const mapStateToProps=state=>({
+    articleList:state.Article.list
+})
+
+const mapActionToProps={
+    fetchAllArticles: actions.fetchAll
+}
+export default connect(mapStateToProps,mapActionToProps)(Articles);

@@ -8,11 +8,12 @@ export const ACTION_TYPES={
 }
 
 export const fetchAll=()=> dispatch=>{
-    api.article()
-    .then(res=>{
+    api.article().fetchAll()
+    .then(response=>{
+        console.log(response+"-->list");
         dispatch({
         type: ACTION_TYPES.FETCH_ALL,
-        payload: []
+        payload: response.data
         })
     })
     .catch(err=>console.log(err));
