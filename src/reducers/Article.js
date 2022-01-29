@@ -9,7 +9,7 @@ export const Article =(state=initialState,action)=>{
         case ACTION_TYPES.FETCH_ALL:
             return {
                 ...state,
-                list: [...action.payload]
+                list: [...action.payload.data]
             }
         default:
             return state
