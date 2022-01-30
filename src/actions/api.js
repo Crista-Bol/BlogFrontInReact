@@ -5,6 +5,7 @@ export default {
     article(url=baseUrl){
         return {
             fetchAll: ()=>axios.get('https://localhost:44310/Articles/getAll'),
+            fetchAllCats: ()=>axios.get('https://localhost:44310/api/artCats'),
             fetchById: id=> axios.get(baseUrl+"/api/"+id),
             create:newRecord=>axios.post(baseUrl+"/api/addArticle",newRecord),
             update:(id,updateRecord)=>axios.put(url+"/api/updateArticle/"+id,updateRecord),

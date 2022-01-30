@@ -4,7 +4,8 @@ export const ACTION_TYPES={
     CREATE : 'CREATE',
     UPDATE : 'UPDATE',
     DELETE : 'DELETE',
-    FETCH_ALL: 'FETCH_ALL'
+    FETCH_ALL: 'FETCH_ALL',
+    FETCH_ALL_CATS: 'FETCH_ALL_CATS'
 }
 
 export const fetchAll=()=> dispatch=>{
@@ -16,7 +17,18 @@ export const fetchAll=()=> dispatch=>{
         payload: response.data
         })
     })
-    .catch(err=>console.log(err));
-   
-    
+    .catch(err=>console.log(err)); 
 }
+
+export const fetchAllCats=()=>dispatch=>{
+    api.article.fetchAllCats()
+    .then(res=>{
+        console.log(res+ " cats");
+        dispatch({
+            type: ACTION_TYPES.FETCH_ALL_CATS,
+            payload: res.data
+        })
+    })
+    .catch(err=>console.log("Error while pulling cats: "+err));
+}
+

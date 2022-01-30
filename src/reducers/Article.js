@@ -1,7 +1,8 @@
 import { ACTION_TYPES } from "../actions/Article";
 
 const initialState={
-    list:[]
+    list:[],
+    catList:[]
 }
 
 export const Article =(state=initialState,action)=>{
@@ -10,6 +11,11 @@ export const Article =(state=initialState,action)=>{
             return {
                 ...state,
                 list: [...action.payload.data]
+            }
+        case ACTION_TYPES.FETCH_ALL_CATS:
+            return {
+                ...state,
+                catList: [...action.payload.data]
             }
         default:
             return state
