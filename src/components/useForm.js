@@ -1,20 +1,25 @@
 import React, {useState} from "react"
 
-const useForm=(initialFieldValues)=>{
+const useForm=(initialFieldValues,validate)=>{
 
-    const [values,setValues]=useState(initialFieldValues)
+    const [values,setValues]=useState(initialFieldValues);
+    const [errors,setErrors]=useState([]);
 
     const handleChange=e=>{
     
-        const [name,value]=e.target
+        const {name,value}=e.target
+        const fieldValue={[name]:value}
         setValues({
             ...values,
-            [name]:value
+            fieldValue
         })
+        validate(fieldValue)
     }
     return {
         values,
         setValues,
+        errors,
+        setErrors,
         handleChange
     }
 }

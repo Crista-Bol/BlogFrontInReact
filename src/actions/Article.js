@@ -21,7 +21,7 @@ export const fetchAll=()=> dispatch=>{
 }
 
 export const fetchAllCats=()=>dispatch=>{
-    api.article.fetchAllCats()
+    api.article().fetchAllCats()
     .then(res=>{
         console.log(res+ " cats");
         dispatch({

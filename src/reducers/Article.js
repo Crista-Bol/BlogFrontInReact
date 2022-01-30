@@ -13,9 +13,10 @@ export const Article =(state=initialState,action)=>{
                 list: [...action.payload.data]
             }
         case ACTION_TYPES.FETCH_ALL_CATS:
+            console.log(action.payload+" this is cats");
             return {
                 ...state,
-                catList: [...action.payload.data]
+                catList: [...action.payload]
             }
         default:
             return state
