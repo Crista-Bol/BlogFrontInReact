@@ -36,17 +36,17 @@ const ArticleForm=({classes,...props})=>{
      const validate=(fieldValues=values)=>{
         let temp={}
         if('header' in fieldValues)
-            temp.header=values.header?"":"This field is required."
+            temp.header=fieldValues.header?"":"This field is required."
         if('image' in fieldValues)
-            temp.image=values.image?"":"This field is required."
+            temp.image=fieldValues.image?"":"This field is required."
         if('catId' in fieldValues)
-            temp.catId=values.catId!=0?"":"This field is required."
+            temp.catId=fieldValues.catId!=0?"":"This field is required."
 
         setErrors({...temp})
         if(fieldValues==values)
             return Object.values(temp).every(x=>x=="")
     }
-    
+
     const {values,setValues,errors,setErrors,handleChange}=useForm(initialFieldValues,validate)
     
    
@@ -62,7 +62,7 @@ const ArticleForm=({classes,...props})=>{
     const handleSubmit=e=>{
         e.preventDefault();
         if(validate()){
-            window.alert("Validation succeeded");
+            props.createArt(values,()=>{window.alert("Created")})
         }
     }
 
@@ -82,19 +82,19 @@ const ArticleForm=({classes,...props})=>{
                 variant="outlined"
                 value={values.image}
                 onChange={handleChange}
-                {...(errors.header && {error:true, helperText:errors.header})}/>
+                {...(errors.image && {error:true, helperText:errors.image})}/>
             <TextField 
                 name="body"
                 label="Body"
                 variant="outlined"
                 value={values.body}
                 onChange={handleChange}/>
-            <FormControl variant="outlined" className={classes.formControl}
+            <FormControl variant="outlined" className={classes.formControl}  
             {...(errors.catId && {error:true})}>
                 <InputLabel>Category</InputLabel>
                 <Select name="catId" value={values.catId} onChange={handleChange}>
-                    <MenuItem value={0}>Select Category</MenuItem>
-                    {props.catList.map((option,index) => (
+                    <MenuItem value={0}>Choose Category</MenuItem>
+                     {props.catList.map((option,index) => (
                      <MenuItem key={index} value={option.id}>{option.name}</MenuItem>
                     ))}
                 </Select>
@@ -117,6 +117,8 @@ const mapStateToProps=state=>({
 })
 
 const mapActionToProps={
-    fetchAllCats: actions.fetchAllCats
+    fetchAllCats: actions.fetchAllCats,
+    createArt: actions.addArticle,
+    updateArt: actions.updateArticle
 }
 export default connect(mapStateToProps,mapActionToProps)(withStyles(styles)(ArticleForm));

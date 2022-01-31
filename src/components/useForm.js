@@ -11,9 +11,9 @@ const useForm=(initialFieldValues,validate)=>{
         const fieldValue={[name]:value}
         setValues({
             ...values,
-            fieldValue
+            ...fieldValue
         })
-        validate(fieldValue)
+        validate()
     }
     return {
         values,
