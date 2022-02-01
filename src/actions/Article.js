@@ -33,7 +33,8 @@ export const fetchAllCats=()=>dispatch=>{
 }
 
 export const addArticle=(data,onSuccess)=>dispatch=>{
-    api.article().create(data)
+    console.log(data.catId+" catid in data")
+    api.article().create(data,data.catId)
     .then(res=>{
         dispatch({
             type: ACTION_TYPES.CREATE,
@@ -44,7 +45,7 @@ export const addArticle=(data,onSuccess)=>dispatch=>{
     .catch(err=>console.log("Error while adding art: "+err));
 }
 export const updateArticle=(id,data,onSuccess)=>dispatch=>{
-    api.article().update(id,data)
+    api.article().update(id,data.catId,data)
     .then(res=>{
         dispatch({
             type: ACTION_TYPES.UPDATE,

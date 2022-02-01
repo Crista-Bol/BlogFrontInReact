@@ -58,12 +58,31 @@ const ArticleForm=({classes,...props})=>{
         props.fetchAllCats();
     
     },[])
-      
+    
+    React.useEffect(()=>{
+        if(props.currentId!=0)
+            setValues({
+                ...props.articleList.find(a=>a.id==props.currentId)
+            })
+    },[props.currentId])
+
     const handleSubmit=e=>{
         e.preventDefault();
         if(validate()){
-            props.createArt(values,()=>{window.alert("Created")})
+            
+            if(props.currentId!=0)
+                props.updateArt(props.currentId,values,()=>{window.alert("Updated")})
+            else
+                props.createArt(values,()=>{window.alert("Created")})
         }
+    }
+
+    const reset=()=>{
+        setValues({
+            ...initialFieldValues
+        })
+        props.setCurrentId(0)
+        setErrors([])
     }
 
     return (<form autoComplete="off" noValidate className={classes.root} onSubmit={handleSubmit}>
@@ -89,7 +108,7 @@ const ArticleForm=({classes,...props})=>{
                 variant="outlined"
                 value={values.body}
                 onChange={handleChange}/>
-            <FormControl variant="outlined" className={classes.formControl}  
+            <FormControl variant="outlined"  
             {...(errors.catId && {error:true})}>
                 <InputLabel>Category</InputLabel>
                 <Select name="catId" value={values.catId} onChange={handleChange}>
@@ -104,7 +123,7 @@ const ArticleForm=({classes,...props})=>{
                 <button color="primary"
                 variant="contained" type="submit" className={classes.smMargin}>Submit</button>
                 <button
-                variant="contained" className={classes.smMargin}>Reset</button>
+                variant="contained" onClick={reset} className={classes.smMargin}>Reset</button>
             </div>
             </Grid>
             
@@ -113,7 +132,8 @@ const ArticleForm=({classes,...props})=>{
     </form>);
 }
 const mapStateToProps=state=>({
-    catList:state.Article.catList
+    catList:state.Article.catList,
+    articleList:state.Article.list
 })
 
 const mapActionToProps={

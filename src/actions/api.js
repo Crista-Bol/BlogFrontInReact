@@ -7,8 +7,8 @@ export default {
             fetchAll: ()=>axios.get('https://localhost:44310/Articles/getAll'),
             fetchAllCats: ()=>axios.get('https://localhost:44310/api/artCats'),
             fetchById: id=> axios.get(baseUrl+"/api/"+id),
-            create:newRecord=>axios.post(baseUrl+"/api/addArticle",newRecord),
-            update:(id,updateRecord)=>axios.put(url+"/api/updateArticle/"+id,updateRecord),
+            create:(newRecord,catId)=>axios.post(baseUrl+"/api/addArticle/"+catId,newRecord),
+            update:(id,catId,updateRecord)=>axios.put(url+"/api/updateArticle/"+id+"/"+catId,updateRecord),
             delete:id=>axios.delete(url+"/api/deleteArticle/"+id)
         }
     }
